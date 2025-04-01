@@ -3,12 +3,12 @@
 
   const links = [
     {
-      param: "/",
-      name: "Home",
+      "param": "/",
+      "name": "Home",
     },
     {
-      param: "/dashboard",
-      name: "Dashboard",
+      "param": "/dashboard",
+      "name": "Dashboard",
     },
   ];
 </script>

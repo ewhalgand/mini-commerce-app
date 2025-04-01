@@ -8,4 +8,17 @@
   --color-tertiary: #262626;
 
   --shadow-bg: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  --shadow-btn: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0;
+  /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
 }

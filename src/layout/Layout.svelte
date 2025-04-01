@@ -3,8 +3,10 @@
   import Header from "../components/header.svelte";
 </script>
 
-<main>
+<div class="flex flex-col min-h-screen">
   <Header />
-  <slot />
+  <main class="flex-1">
+    <slot />
+  </main>
   <Footer />
-</main>
+</div>
