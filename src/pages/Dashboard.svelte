@@ -21,12 +21,19 @@
       "type": "number",
     },
   ];
+
+  const handleSubmit = () => {
+    console.log("Coucou");
+  };
 </script>
 
-<section class="max-w-7xl m-auto p-9">
-  <h1 class="font-bold text-2xl text-tertiary mb-8">Mini-Commerce Dashboard</h1>
+<section class="max-w-7xl m-auto pr-4 pl-4 pt-9 pb-9 sm:p-9">
+  <h1 class="font-bold text-center text-2xl text-tertiary mb-8 sm:text-start">
+    Mini-Commerce Dashboard
+  </h1>
   <div>
     <form
+      on:submit|preventDefault={handleSubmit}
       id="form"
       class="flex flex-col bg-primary shadow-bg rounded-2xl p-6 gap-6"
     >
@@ -41,8 +48,9 @@
 
       <button
         class="m-auto bg-blue-300 p-2 rounded-sm text-primary font-semibold shadow-btn cursor-pointer"
-        >Post a new Article</button
       >
+        Post a new Article
+      </button>
     </form>
   </div>
 </section>
