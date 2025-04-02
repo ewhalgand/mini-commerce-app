@@ -1,29 +1,29 @@
 <script lang="ts">
   import Input from "../components/input.svelte";
+  import { inputComponents } from "../lib/localData";
+  import { useFetcher } from "../lib/useFetcher";
 
-  const inputComponents = [
-    {
-      "label": "Enter a title",
-      "placeholder": "Enter a title",
-      "name": "title",
-      "type": "text",
-    },
-    {
-      "label": "Enter a description",
-      "placeholder": "Enter a description",
-      "name": "body",
-      "type": "text",
-    },
-    {
-      "label": "Enter a price",
-      "placeholder": "Enter a price",
-      "name": "price",
-      "type": "number",
-    },
-  ];
+  let formData = inputComponents.reduce((acc: any, input) => {
+    acc[input.id] = input.type === "number" ? 0 : "";
+    return acc;
+  }, {});
 
-  const handleSubmit = () => {
-    console.log("Coucou");
+  const { fetchData } = useFetcher("http://localhost:3001/api/products", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+    },
+  });
+
+  const handleSubmit = async () => {
+    try {
+      await fetchData({ body: JSON.stringify(formData) });
+
+      formData = {};
+    } catch (error) {
+      console.error("Échec complet:", error);
+    }
   };
 </script>
 
@@ -42,11 +42,15 @@
       </h1>
       {#each inputComponents as inputComponent}
         <div class="flex flex-col gap-2">
-          <Input dataInput={inputComponent} />
+          <Input
+            dataInput={inputComponent}
+            bind:value={formData[inputComponent.id]}
+          />
         </div>
       {/each}
 
       <button
+        type="submit"
         class="m-auto bg-blue-300 p-2 rounded-sm text-primary font-semibold shadow-btn cursor-pointer"
       >
         Post a new Article

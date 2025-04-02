@@ -1,16 +1,6 @@
 <script>
   import { link } from "svelte-spa-router";
-
-  const links = [
-    {
-      "param": "/",
-      "name": "Home",
-    },
-    {
-      "param": "/dashboard",
-      "name": "Dashboard",
-    },
-  ];
+  import { links } from "../lib/localData";
 </script>
 
 <nav class="bg-secondary p-4 flex justify-center gap-4">
