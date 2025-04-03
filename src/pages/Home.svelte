@@ -16,8 +16,8 @@
   <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
     {#if $loading}
       <p>Chargement...</p>
-    {:else if $error}
-      <p>Error : {$error}</p>
+    {:else if $error.err}
+      <p>Error : {$error.err}</p>
     {:else}
       {#each $data as products}
         <Card product={products} />

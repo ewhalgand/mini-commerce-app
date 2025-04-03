@@ -1,5 +1,6 @@
 <script lang="ts">
   export let dataInput: {
+    id: string;
     type: string;
     name: string;
     label?: string;
@@ -10,7 +11,8 @@
 
 <label class="font-semibold text-tertiary" for="title">{dataInput.label}</label>
 <input
-  class="border-3 border-secondary rounded-xl p-2"
+  id={dataInput.id}
+  class="border-2 rounded-xl outline-none p-2 border-secondary"
   type={dataInput.type}
   name={dataInput.name}
   placeholder={dataInput.placeholder}

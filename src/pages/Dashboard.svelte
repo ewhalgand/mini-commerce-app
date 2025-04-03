@@ -8,19 +8,24 @@
     return acc;
   }, {});
 
-  const { fetchData } = useFetcher("http://localhost:3001/api/products", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Accept": "application/json",
-    },
-  });
+  const { error, fetchData } = useFetcher(
+    "http://localhost:3001/api/products",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+      },
+    }
+  );
 
   const handleSubmit = async () => {
     try {
       await fetchData({ body: JSON.stringify(formData) });
 
-      formData = {};
+      if (!$error.err) {
+        formData = {};
+      }
     } catch (error) {
       console.error("Échec complet:", error);
     }
@@ -34,7 +39,6 @@
   <div>
     <form
       on:submit|preventDefault={handleSubmit}
-      id="form"
       class="flex flex-col bg-primary shadow-bg rounded-2xl p-6 gap-6"
     >
       <h1 class="text-center font-semibold text-lg text-tertiary">
@@ -48,6 +52,10 @@
           />
         </div>
       {/each}
+
+      {#if $error.err && (!$error.emptyFields || $error.emptyFields.length === 0)}
+        <p class="text-red-500">Error : {$error.err}</p>
+      {/if}
 
       <button
         type="submit"
