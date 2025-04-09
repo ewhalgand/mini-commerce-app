@@ -1,42 +1,36 @@
 <script lang="ts">
+  import { onMount } from "svelte";
+  import DeleteCard from "../components/delete-card.svelte";
   import Input from "../components/input.svelte";
   import { inputComponents } from "../lib/localData";
-  import { useFetcher } from "../lib/useFetcher";
+  import { fetchProducts, postProduct } from "../lib/productDataStore";
+
+  onMount(fetchProducts);
 
   let formData = inputComponents.reduce((acc: any, input) => {
     acc[input.id] = input.type === "number" ? 0 : "";
     return acc;
   }, {});
 
-  const { error, fetchData } = useFetcher(
-    "http://localhost:3001/api/products",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-      },
-    }
-  );
+  let errorMessage: string | null = null;
 
   const handleSubmit = async () => {
-    try {
-      await fetchData({ body: JSON.stringify(formData) });
+    const { success, error } = await postProduct(formData);
 
-      if (!$error.err) {
-        formData = {};
-      }
-    } catch (error) {
-      console.error("Échec complet:", error);
+    if (!success) {
+      errorMessage = `Error: ${error}`;
+    } else {
+      formData = { price: 0 };
+      errorMessage = null;
     }
   };
 </script>
 
-<section class="max-w-7xl m-auto pr-4 pl-4 pt-9 pb-9 sm:p-9">
+<section class="max-w-7xl m-auto pr-4 pl-4 pt-9 pb-9 sm:p-9 md:min-h-screen">
   <h1 class="font-bold text-center text-2xl text-tertiary mb-8 sm:text-start">
     Mini-Commerce Dashboard
   </h1>
-  <div>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
     <form
       on:submit|preventDefault={handleSubmit}
       class="flex flex-col bg-primary shadow-bg rounded-2xl p-6 gap-6"
@@ -53,8 +47,8 @@
         </div>
       {/each}
 
-      {#if $error.err && (!$error.emptyFields || $error.emptyFields.length === 0)}
-        <p class="text-red-500">Error : {$error.err}</p>
+      {#if errorMessage}
+        <p class="text-red-500">{errorMessage}</p>
       {/if}
 
       <button
@@ -64,5 +58,6 @@
         Post a new Article
       </button>
     </form>
+    <DeleteCard />
   </div>
 </section>

@@ -5,9 +5,9 @@
 
 <div class="w-full bg-primary rounded-xl shadow-bg">
   <img class="rounded-t-2xl" src={Image} alt="img default" />
-  <div class="p-4 flex flex-col gap-3 font-semibold text-tertiary">
-    <h4>{product.title}</h4>
-    <p>{product.body}</p>
-    <p>${product.price}</p>
+  <div class="p-4 flex flex-col gap-2">
+    <h1 class="font-semibold text-tertiary text-lg">{product.title}</h1>
+    <p class="text-gray-700">{product.body}</p>
+    <p>{product.price}$</p>
   </div>
 </div>
