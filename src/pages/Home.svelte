@@ -6,8 +6,34 @@
     loading,
     productsData,
   } from "../lib/productDataStore";
+  import FilterData from "../components/filter-data.svelte";
 
   let errorMessage: string | null = null;
+  let minPrice: number = 0;
+  let maxPrice: number = 0;
+  let absoluteMin: number = 0;
+  let absoluteMax: number = 0;
+
+  // Calcul des valeurs min/max absolues quand les données changent
+  $: if ($productsData.length > 0) {
+    absoluteMin = Math.ceil(
+      Math.min(...$productsData.map((product) => product.price - 1))
+    );
+    absoluteMax = Math.ceil(
+      Math.max(...$productsData.map((product) => product.price))
+    );
+
+    // Initialisation des valeurs si non définies
+    if (minPrice === 0) minPrice = absoluteMin;
+    if (maxPrice === 0) maxPrice = absoluteMax;
+
+    if (minPrice <= 10) absoluteMin = 8;
+  }
+
+  // Filtrage des produits
+  $: filteredProducts = $productsData.filter(
+    (product) => product.price >= minPrice && product.price <= maxPrice
+  );
 
   onMount(async () => {
     const { error } = await fetchProducts();
@@ -22,13 +48,30 @@
   <h1 class="font-bold text-center text-2xl text-tertiary mb-8 sm:text-start">
     Mini-Commerce Home
   </h1>
+
+  {#if $productsData.length > 0}
+    <div class="flex flex-col gap-4 mb-6">
+      <div class="flex items-center gap-3">
+        <span class="text-sm text-gray-500">Min ({minPrice}$)</span>
+        <input
+          type="range"
+          min={absoluteMin}
+          max={absoluteMax}
+          bind:value={maxPrice}
+          class="w-full h-2 rounded-lg appearance-none cursor-pointer bg-gray-300 md:w-[400px] custom-slider"
+        />
+        <span class="text-sm text-gray-500">Max ({maxPrice}$)</span>
+      </div>
+    </div>
+  {/if}
+
   <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
     {#if $loading}
       <p>Loading...</p>
     {:else if errorMessage}
       <p class="text-red-500">{errorMessage}</p>
     {:else}
-      {#each $productsData as products}
+      {#each filteredProducts as products}
         <Card product={products} />
       {/each}
     {/if}

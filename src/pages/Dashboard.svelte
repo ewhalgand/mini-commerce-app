@@ -18,7 +18,7 @@
     const { success, error } = await postProduct(formData);
 
     if (!success) {
-      errorMessage = `Error: ${error}`;
+      errorMessage = `${error}`;
     } else {
       formData = { price: 0 };
       errorMessage = null;

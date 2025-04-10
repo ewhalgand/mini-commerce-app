@@ -22,3 +22,14 @@ input[type="number"]::-webkit-inner-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
+
+/* partie commune */
+input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 10px;
+  background: rgb(191, 118, 255);
+  border: 3px solid oklch(0.541 0.281 293.009);
+  border-radius: 20px;
+  padding: 2px;
+}
