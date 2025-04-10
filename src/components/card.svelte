@@ -8,6 +8,6 @@
   <div class="p-4 flex flex-col gap-2">
     <h1 class="font-semibold text-tertiary text-lg">{product.title}</h1>
     <p class="text-gray-700">{product.body}</p>
-    <p>{product.price}$</p>
+    <p>${product.price}</p>
   </div>
 </div>

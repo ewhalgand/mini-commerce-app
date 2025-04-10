@@ -29,6 +29,7 @@ const inputComponents = [
     type: "number",
     name: "price",
     label: "Price",
+    step: "any",
     placeholder: "Enter a price",
   },
 ];

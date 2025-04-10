@@ -4,9 +4,17 @@
     type: string;
     name: string;
     label?: string;
+    step?: any;
     placeholder: string;
   };
   export let value: string;
+
+  const handleInput = (e: Event) => {
+    if (dataInput.type === "text") {
+      const input = e.target as HTMLInputElement;
+      value = input.value.replace(/[0-9]/g, "");
+    }
+  };
 </script>
 
 <label class="font-semibold text-tertiary" for="title">{dataInput.label}</label>
@@ -16,5 +24,7 @@
   type={dataInput.type}
   name={dataInput.name}
   placeholder={dataInput.placeholder}
+  {...dataInput.type === "number" ? { step: dataInput.step } : {}}
   bind:value
+  on:input={handleInput}
 />
