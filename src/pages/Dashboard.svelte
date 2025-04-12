@@ -4,6 +4,7 @@
   import Input from "../components/input.svelte";
   import { inputComponents } from "../lib/localData";
   import { fetchProducts, postProduct } from "../lib/productDataStore";
+  import Timer from "../components/timer.svelte";
 
   onMount(fetchProducts);
 
@@ -27,9 +28,12 @@
 </script>
 
 <section class="max-w-7xl m-auto pr-4 pl-4 pt-9 pb-9 sm:p-9 md:min-h-screen">
-  <h1 class="font-bold text-center text-2xl text-tertiary mb-8 sm:text-start">
-    Mini-Commerce Dashboard
-  </h1>
+  <div
+    class="flex items-center justify-between mb-8 font-bold text-center text-2xl text-tertiary sm:text-start"
+  >
+    <h1>Mini-Commerce Dashboard</h1>
+    <Timer />
+  </div>
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
     <form
       on:submit|preventDefault={handleSubmit}

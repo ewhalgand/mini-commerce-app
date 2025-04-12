@@ -7,7 +7,7 @@
     step?: any;
     placeholder: string;
   };
-  export let value: string;
+  export let value: string | number;
 
   const handleInput = (e: Event) => {
     if (dataInput.type === "text") {
