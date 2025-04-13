@@ -29,7 +29,7 @@
 
 <section class="max-w-7xl m-auto pr-4 pl-4 pt-9 pb-9 sm:p-9 md:min-h-screen">
   <div
-    class="flex items-center justify-between mb-8 font-bold text-center text-2xl text-tertiary sm:text-start"
+    class="flex flex-col items-center mb-8 font-bold text-center text-2xl text-tertiary gap-2 sm:flex-row sm:justify-between"
   >
     <h1>Mini-Commerce Dashboard</h1>
     <Timer />

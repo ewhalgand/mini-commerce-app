@@ -1,12 +1,22 @@
 <script lang="ts">
+  // interface DataInput {
+  //   id: string;
+  //   type: string;
+  //   name: string;
+  //   label?: string;
+  //   placeholder: string;
+  //   maxlength?: string;
+  //   step?: number;
+  // }
+
   export let dataInput: {
     id: string;
     type: string;
     name: string;
     label?: string;
-    step?: any;
     placeholder: string;
-    maxlength: number;
+    maxlength?: number;
+    step?: string;
   };
   export let value: string | number;
 
@@ -27,8 +37,8 @@
   type={dataInput.type}
   name={dataInput.name}
   placeholder={dataInput.placeholder}
-  {...dataInput.name === "body" ? { maxlength: dataInput.maxlength } : {}}
-  {...dataInput.type === "number" ? { step: dataInput.step } : {}}
+  maxlength={dataInput.name === "body" ? dataInput.maxlength : undefined}
+  step={dataInput.type === "number" ? dataInput.step : undefined}
   bind:value
   on:input={handleInput}
 />

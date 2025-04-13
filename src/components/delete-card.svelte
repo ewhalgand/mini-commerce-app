@@ -30,15 +30,17 @@
     <p class="text-gray-600">No products to display</p>
   {:else}
     {#each $productsData as product (product._id)}
-      <div class="flex justify-between items-center py-4">
-        <div class="flex items-center gap-4">
+      <div
+        class="flex flex-col items-center py-4 sm:flex-row sm:justify-between"
+      >
+        <div class="flex flex-col items-center mb-2 gap-4 sm:flex-row sm:mb-0">
           <img
             class="rounded-lg object-cover w-32"
             src={product.image || Image}
             alt={product.title || "product image"}
             loading="lazy"
           />
-          <div class="flex flex-col gap-2">
+          <div class="flex flex-col items-center gap-2">
             <h1 class="font-semibold text-tertiary text-lg">{product.title}</h1>
             <p class="text-gray-700">
               {product.body.length > 10
