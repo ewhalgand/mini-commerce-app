@@ -8,7 +8,7 @@
 
 <div class="flex flex-col gap-4 mb-6">
   <div class="flex items-center gap-3">
-    <span class="text-sm text-gray-500">Min ({minPrice}$)</span>
+    <span class="text-sm text-gray-500">Min (${minPrice})</span>
     <input
       type="range"
       min={absoluteMin}
@@ -16,7 +16,7 @@
       bind:value
       class="w-full h-2 rounded-lg appearance-none cursor-pointer bg-gray-300 md:w-[400px] custom-slider"
     />
-    <span class="text-sm text-gray-500">Max ({maxPrice}$)</span>
+    <span class="text-sm text-gray-500">Max (${maxPrice})</span>
   </div>
 </div>
 

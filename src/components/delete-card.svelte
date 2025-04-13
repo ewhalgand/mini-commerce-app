@@ -40,7 +40,11 @@
           />
           <div class="flex flex-col gap-2">
             <h1 class="font-semibold text-tertiary text-lg">{product.title}</h1>
-            <p class="text-gray-700">{product.body}</p>
+            <p class="text-gray-700">
+              {product.body.length > 10
+                ? `${product.body.substring(0, 10)}...`
+                : product.body}
+            </p>
           </div>
         </div>
         <DeleteButton id={product._id} />

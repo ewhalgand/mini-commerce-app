@@ -22,7 +22,8 @@ const inputComponents = [
     type: "text",
     name: "body",
     label: "Description",
-    placeholder: "Enter a description",
+    placeholder: "Enter a small description",
+    maxlength: "30",
   },
   {
     id: "price",
